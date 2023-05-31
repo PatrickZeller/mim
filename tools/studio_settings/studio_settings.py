@@ -97,7 +97,6 @@ class StudioSettings(QtWidgets.QDialog):
         
         Parms:
             name (string): the name of the menu that should be collpsed
-
         """
         menu = self.findChild(QtWidgets.QCheckBox, name)
         groupbox = self.findChild(QtWidgets.QGroupBox, "{}_gb".format(name))
