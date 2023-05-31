@@ -89,7 +89,6 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-	image: url(:/icons/resources/drop_arrow.png);
 	width: 15px;
 }
 
@@ -107,7 +106,6 @@ QCheckBox{
 }
 QCheckBox::indicator::unchecked{ 
 	border: 0px solid;
-	image: url(:/icons/resources/plus.png);
 	background-color: rgb(55,55,55); 
 	width: 16px; 
 	height: 16px; 
@@ -115,7 +113,6 @@ QCheckBox::indicator::unchecked{
 
 QCheckBox::indicator::checked{ 
 	border: 0px solid; 
-	image: url(:/icons/resources/minus.png);
 	background-color: rgb(55,55,55); 
 	width: 16px; 
 	height: 16px; 
