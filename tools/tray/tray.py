@@ -8,6 +8,7 @@ from mim import resources
 import mim.version
 from mim import style
 from tools.launcher import launcher
+from tools.studio_settings import studio_settings
 
 class mim_tray(QtWidgets.QSystemTrayIcon):
     """
@@ -134,8 +135,8 @@ class mim_tray(QtWidgets.QSystemTrayIcon):
         """
         this function will open studio settings
         """
-        self.launcher_instance = launcher.Launcher()
-        self.launcher_instance.show()
+        self.studio_settings_instance = studio_settings.StudioSettings()
+        self.studio_settings_instance.show()
 
 
 def main():
