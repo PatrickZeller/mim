@@ -129,7 +129,7 @@ def prep_db(location):
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         list_id INTEGER,
                         project_id INTEGER,
-                        FOREIGN KEY (list_id) REFERENCES config(id),
+                        FOREIGN KEY (list_id) REFERENCES recent_project_list(id),
                         FOREIGN KEY (project_id) REFERENCES projects(id)
                         )"""
         )

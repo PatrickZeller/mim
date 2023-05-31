@@ -1,0 +1,199 @@
+.collapsible {
+  background-color: rgb(32, 33, 36);
+  color: rgb(241,243,244);
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1.0em;
+}
+
+.active {
+  color: black;
+  background-color: rgb(233, 215, 0);
+}
+
+.collapsible:hover {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.content {
+  height: 100%;
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: rgb(53,54,58);
+}
+
+a {
+	color:#FFFFFF;
+	font-size: 0.9em;
+}
+	
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: rgb(233, 215, 0);
+}
+
+h1 {
+  display: block;
+  font-size: 0.8em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: rgb(233, 215, 0);
+}
+
+p {
+  display: block;
+  font-size: 0.8em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-family: sans-serif;
+  color: rgb(133,133,133);
+}
+pp {
+  display: block;
+  font-size: 0.1em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-family: sans-serif;
+  color: rgb(0,0,0);
+}
+
+.files {
+  display: block;
+  font-size: 1em;
+  font-family: sans-serif;
+  color: #FFFFFF;
+}
+
+.HL {
+  display: block;
+  font-size: 1em;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+body {background-color: rgb(53,54,58);
+	font-family: sans-serif;
+}
+
+hr { 
+    width: 100%; 
+    height: 5px; 
+    margin: 0 auto;
+    outline: none;
+    border: none;
+    color:  rgb(105, 179, 71);
+    background:  rgb(233, 215, 0);
+}
+
+hr.v { 
+    width: 10px; 
+    height: 100%;
+    outline: none;
+    border: none;
+    color:  rgb(233, 215, 0);
+}
+
+/* Flex */
+.flex {
+  display: flex;
+  flex-wrap: nowrap; 
+  overflow: auto;
+}
+.flex-item {
+  flex: 0 0 auto;
+  outline: none;
+  border: none;
+}
+
+.containerPDF {
+  margin: 5px;
+  width: 100%;
+  height: 520px;
+  /*border: 2px solid #341C09;*/
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+
+.containerTXT {
+  margin: 5px;
+  width: 100%;
+  height: 430px;
+
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+
+.containerIMG {
+  margin: 5px;
+  width: 100%;
+  height: 260px;
+
+  white-space: nowrap;
+}
+
+.containerMP4 {
+  margin: 5px;
+  width: 100%;
+  height: 260px;
+
+  white-space: nowrap;
+}
+
+.containerOTHER {
+  margin: 5px;
+  width: 100%;
+
+  outline: none;
+  border: none;
+  white-space: nowrap;
+}
+
+.HL {
+  margin: 1px;
+  width: 100%;
+  height: 60px;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+}
+
+object {
+     background-color: white;
+}
+
+.folder {
+	color:  rgb(233, 215, 0);
+}
+
+.scale-down {object-fit: scale-down;}
+
+.mybutton {
+    background-color: rgb(32, 33, 36);
+    color: rgb(241,243,244);
+    outline: none;
+    border: none;
+    font-size: 0.8em;
+}
