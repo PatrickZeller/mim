@@ -7,6 +7,59 @@ from mim import style
 from mim import core
 from mim import resources
 
+class pathWidget(QtWidgets.QWidget):
+    """defines a path widget for settings"""
+    def __init__(self, label, parent=None):
+        super(pathWidget, self).__init__(parent)
+        self.setObjectName(label)
+        
+        self.label = QtWidgets.QLabel(label)
+
+        self.hl = QtWidgets.QHBoxLayout()
+        self.setLayout(self.hl)
+        self.hl.addWidget(self.label)
+
+        self.w = QtWidgets.QWidget()
+        self.paths = QtWidgets.QVBoxLayout()
+        self.w.setLayout(self.paths)
+        self.hl.addWidget(self.w)
+        self.add_parm("Linux:")
+        self.add_parm("Mac:")
+        self.add_parm("Windows:")
+        self.hl.addWidget(self.w)
+    
+    def add_parm(self, name):
+        widget = QtWidgets.QWidget()
+        layout = QtWidgets.QHBoxLayout()
+        widget.setLayout(layout)
+        label = QtWidgets.QLabel(name)
+        label.setMinimumWidth(85)
+        path = QtWidgets.QLineEdit()
+        layout.addWidget(label)
+        layout.addWidget(path)
+        self.paths.addWidget(widget)
+        pass
+
+class envWidget(QtWidgets.QWidget):
+    """defines a env widget for settings"""
+    def __init__(self, parent=None):
+        super(envWidget, self).__init__(parent)
+        self.setObjectName("Environment")
+        
+        self.label = QtWidgets.QLabel("Environment")
+
+        self.hl = QtWidgets.QHBoxLayout()
+        self.setLayout(self.hl)
+        self.hl.addWidget(self.label)
+
+        self.w = QtWidgets.QTextEdit()
+        self.w.setText("""{
+        
+        }
+        """)
+        self.hl.addWidget(self.w)
+    
+
 class StudioSettings(QtWidgets.QDialog):
     """Studio Settings interface"""
 
@@ -17,7 +70,7 @@ class StudioSettings(QtWidgets.QDialog):
         self.setWindowIcon(icon)
         self.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, False)
-        self.resize(536, 422)
+        self.resize(900, 1000)
         
         # setup layout
         self.base = QtWidgets.QVBoxLayout(self)
@@ -39,12 +92,17 @@ class StudioSettings(QtWidgets.QDialog):
         self.add_menu("studio", "Studio", self.vl)
         self.add_menu("project", "Project", self.vl)
 
+        self.add_menu("general", "General", self.get_menu_layout("studio"))
         # add applications menu to studio
         self.add_menu("apps", "Applications", self.get_menu_layout("studio"))
+        apps = self.get_menu_layout("apps")
+        self.app_add_btn = QtWidgets.QPushButton("Add App")
+        apps.addWidget(self.app_add_btn)
+        self.app_add_btn.clicked.connect(self.add_new_app)
 
 
         self.add_menu("plugins", "Plugins", self.get_menu_layout("studio"))
-        self.add_menu("general", "General", self.get_menu_layout("studio"))
+        
         self.add_menu("prj_apps", "Applications", self.get_menu_layout("project"))
         self.add_menu("prj_plugins", "Plugins", self.get_menu_layout("project"))
         self.add_menu("prj_general", "General", self.get_menu_layout("project"))
@@ -54,11 +112,55 @@ class StudioSettings(QtWidgets.QDialog):
         self.base.addWidget(self.save)
 
     def add_new_app(self):
-        """sets up applications menu"""
+        """add new application to menu"""
+        apps = self.get_menu_layout("apps")
+        index = apps.count()
+        names = []
+        for i in range(index):
+            w = apps.itemAt(i).widget()
+            if isinstance(w, QtWidgets.QCheckBox):
+                names.append(w.objectName())
+        counter = 1
+        name = "app%d"%(counter)
+        while name in names:
+            name = "app%d"%(counter)
+            counter += 1
+        self.add_menu(name, name.capitalize(), apps)
+        new_app_layout = self.get_menu_layout(name)
+        new_app_layout.addWidget(self.add_parm("Icon"))
+        new_app_layout.addWidget(self.add_multiline_parm("Environment"))
+
+        #add version button
+        version_add_btn = QtWidgets.QPushButton("Add Version")
+        version_add_btn.clicked.connect(lambda: self.add_new_version(new_app_layout))
+        new_app_layout.addWidget(version_add_btn)
+
+    def add_new_version(self, root):
+        """adds version menu to app"""
+        index = root.count()
+        o_n = root.objectName().split("_")[0]
+        names = []
+        for i in range(index):
+            w = root.itemAt(i).widget()
+            if isinstance(w, QtWidgets.QCheckBox):
+                names.append(w.objectName())
+        counter = 1
+        name = "%s_version%d"%(o_n, counter)
+        while name in names:
+            name = "%s_version%d"%(o_n, counter)
+            counter += 1        
+        self.add_menu(name, name.replace(o_n + "_", "").capitalize(), root)
+        new_version_layout = self.get_menu_layout(name)
+        new_version_layout.addWidget(pathWidget("Executeable"))
+        new_version_layout.addWidget(self.add_parm("Args"))
+        new_version_layout.addWidget(pathWidget("Install_Args"))
+        new_version_layout.addWidget(pathWidget("Install"))
+        new_version_layout.addWidget(self.add_multiline_parm("Environment"))
+
 
     def get_menu_layout(self, name):
         """gets the vertical layout object of the menu
-        
+    
         Parms:
             name (string): name of the menu
 
@@ -104,6 +206,29 @@ class StudioSettings(QtWidgets.QDialog):
             groupbox.show()
         else:
             groupbox.hide()
+
+    def add_parm(self, name):
+        widget = QtWidgets.QWidget()
+        layout = QtWidgets.QHBoxLayout()
+        widget.setLayout(layout)
+        label = QtWidgets.QLabel(name)
+        label.setMinimumWidth(85)
+        path = QtWidgets.QLineEdit()
+        layout.addWidget(label)
+        layout.addWidget(path)
+        return widget
+    
+    def add_multiline_parm(self, name):
+        widget = QtWidgets.QWidget()
+        layout = QtWidgets.QHBoxLayout()
+        widget.setLayout(layout)
+        label = QtWidgets.QLabel(name)
+        label.setMinimumWidth(85)
+        env = QtWidgets.QTextEdit()
+        env.setText("""{}""")
+        layout.addWidget(label)
+        layout.addWidget(env)
+        return widget
 
 
 def main():

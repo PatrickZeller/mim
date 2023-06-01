@@ -244,8 +244,9 @@ def prep_db(location):
                         version_label TEXT,
                         app INTEGER,
                         version_exec TEXT,
-                        version_install TEXT,
                         version_args TEXT,
+                        version_install TEXT,
+                        version_install_args TEXT,
                         version_env TEXT,
                         _meta_ BLOB,
                         FOREIGN KEY (app) REFERENCES applications(id)
