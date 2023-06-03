@@ -5,6 +5,7 @@ import subprocess
 from PySide2 import QtWidgets, QtGui, QtCore
 
 from mim import resources
+from mim.resources import icons
 import mim.version
 from mim import style
 from tools.launcher import launcher
@@ -142,6 +143,7 @@ class mim_tray(QtWidgets.QSystemTrayIcon):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     app.setStyleSheet(style.get_main_style())
+    app.setStyle("Fusion")
     app.setFont(QtGui.QFont("Nunito ExtraLight", 11, QtGui.QFont.Bold))
     app.setQuitOnLastWindowClosed(False)
     tray_icon = mim_tray()

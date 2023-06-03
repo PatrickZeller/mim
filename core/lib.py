@@ -170,12 +170,23 @@ def prep_db(location):
                         )"""
         )
 
+        # create settings_group table
+        cur.execute(
+            """CREATE TABLE IF NOT EXISTS settings_group (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        setting_group TEXT,
+                        _meta_ BLOB,
+                        )"""
+        )        
+
         # create setting table
         cur.execute(
             """CREATE TABLE IF NOT EXISTS setting (
                         id INTEGER PRIMARY KEY AUTOINCREMENT, 
                         setting_name TEXT,
-                        _meta_ BLOB
+                        settings_group_id INTEGER,
+                        _meta_ BLOB,
+                        FOREIGN KEY (settings_group_id) REFERENCES settings_group(id),
                         )"""
         )
         # create setting_values table

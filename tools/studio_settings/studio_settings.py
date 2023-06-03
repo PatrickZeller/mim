@@ -14,13 +14,16 @@ class pathWidget(QtWidgets.QWidget):
         self.setObjectName(label)
         
         self.label = QtWidgets.QLabel(label)
+        self.label.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
 
         self.hl = QtWidgets.QHBoxLayout()
+        self.hl.setContentsMargins(0,0,0,0)
         self.setLayout(self.hl)
         self.hl.addWidget(self.label)
 
         self.w = QtWidgets.QWidget()
         self.paths = QtWidgets.QVBoxLayout()
+        self.paths.setContentsMargins(0,0,0,0)
         self.w.setLayout(self.paths)
         self.hl.addWidget(self.w)
         self.add_parm("Linux:")
@@ -31,33 +34,18 @@ class pathWidget(QtWidgets.QWidget):
     def add_parm(self, name):
         widget = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout()
+        layout.setContentsMargins(0,0,0,0)
         widget.setLayout(layout)
         label = QtWidgets.QLabel(name)
-        label.setMinimumWidth(85)
+        label.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
+        label.setMinimumWidth(75)
         path = QtWidgets.QLineEdit()
+        path.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
         layout.addWidget(label)
         layout.addWidget(path)
         self.paths.addWidget(widget)
         pass
 
-class envWidget(QtWidgets.QWidget):
-    """defines a env widget for settings"""
-    def __init__(self, parent=None):
-        super(envWidget, self).__init__(parent)
-        self.setObjectName("Environment")
-        
-        self.label = QtWidgets.QLabel("Environment")
-
-        self.hl = QtWidgets.QHBoxLayout()
-        self.setLayout(self.hl)
-        self.hl.addWidget(self.label)
-
-        self.w = QtWidgets.QTextEdit()
-        self.w.setText("""{
-        
-        }
-        """)
-        self.hl.addWidget(self.w)
     
 
 class StudioSettings(QtWidgets.QDialog):
@@ -99,6 +87,7 @@ class StudioSettings(QtWidgets.QDialog):
         self.app_add_btn = QtWidgets.QPushButton("Add App")
         apps.addWidget(self.app_add_btn)
         self.app_add_btn.clicked.connect(self.add_new_app)
+        self.app_add_btn.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
 
 
         self.add_menu("plugins", "Plugins", self.get_menu_layout("studio"))
@@ -132,6 +121,7 @@ class StudioSettings(QtWidgets.QDialog):
 
         #add version button
         version_add_btn = QtWidgets.QPushButton("Add Version")
+        version_add_btn.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
         version_add_btn.clicked.connect(lambda: self.add_new_version(new_app_layout))
         new_app_layout.addWidget(version_add_btn)
 
@@ -152,10 +142,21 @@ class StudioSettings(QtWidgets.QDialog):
         self.add_menu(name, name.replace(o_n + "_", "").capitalize(), root)
         new_version_layout = self.get_menu_layout(name)
         new_version_layout.addWidget(pathWidget("Executeable"))
+        new_version_layout.addWidget(self.create_seperator())
         new_version_layout.addWidget(self.add_parm("Args"))
+        new_version_layout.addWidget(self.create_seperator())
         new_version_layout.addWidget(pathWidget("Install_Args"))
+        new_version_layout.addWidget(self.create_seperator())
         new_version_layout.addWidget(pathWidget("Install"))
+        new_version_layout.addWidget(self.create_seperator())
         new_version_layout.addWidget(self.add_multiline_parm("Environment"))
+
+    def create_seperator(self):
+        separator = QtWidgets.QFrame()
+        separator.Shape(QtWidgets.QFrame.HLine)
+        separator.setSizePolicy(QtWidgets.QSizePolicy.Minimum,QtWidgets.QSizePolicy.Expanding)
+        separator.setLineWidth(3)
+        return separator
 
 
     def get_menu_layout(self, name):
@@ -181,10 +182,11 @@ class StudioSettings(QtWidgets.QDialog):
         menu = QtWidgets.QCheckBox(label)
         menu.setObjectName(name)
         menu.setChecked(True)
+        menu.setFont(QtGui.QFont("Nunito ExtraLight", 9, QtGui.QFont.Bold))
         menu.stateChanged.connect(lambda: self.collapse_menu(name))
         menu.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        menu.setMinimumHeight(30)
-        menu.setMaximumHeight(30)
+        menu.setMinimumHeight(28)
+        menu.setMaximumHeight(28)
         groupbox = QtWidgets.QGroupBox()
         groupbox.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         groupbox.setObjectName("{}_gb".format(name))
@@ -210,10 +212,13 @@ class StudioSettings(QtWidgets.QDialog):
     def add_parm(self, name):
         widget = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout()
+        layout.setContentsMargins(0,0,0,0)
         widget.setLayout(layout)
         label = QtWidgets.QLabel(name)
+        label.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
         label.setMinimumWidth(85)
         path = QtWidgets.QLineEdit()
+        path.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
         layout.addWidget(label)
         layout.addWidget(path)
         return widget
@@ -221,11 +226,15 @@ class StudioSettings(QtWidgets.QDialog):
     def add_multiline_parm(self, name):
         widget = QtWidgets.QWidget()
         layout = QtWidgets.QHBoxLayout()
+        layout.setContentsMargins(0,0,0,0)
         widget.setLayout(layout)
         label = QtWidgets.QLabel(name)
+        label.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
         label.setMinimumWidth(85)
         env = QtWidgets.QTextEdit()
         env.setText("""{}""")
+        env.setMaximumHeight(100)
+        env.setFont(QtGui.QFont("Nunito ExtraLight", 8, QtGui.QFont.Normal))
         layout.addWidget(label)
         layout.addWidget(env)
         return widget

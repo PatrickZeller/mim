@@ -89,6 +89,7 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
+	image: url(:/icons/icons/drop_arrow.png);
 	width: 15px;
 }
 
@@ -104,8 +105,9 @@ QCheckBox{
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
-/* QCheckBox::indicator::unchecked{ 
+QCheckBox::indicator::unchecked{ 
 	border: 0px solid;
+	image: url(:/icons/icons/plus.png);
 	background-color: rgb(55,55,55); 
 	width: 16px; 
 	height: 16px; 
@@ -113,10 +115,11 @@ QCheckBox{
 
 QCheckBox::indicator::checked{ 
 	border: 0px solid; 
+	image: url(:/icons/icons/minus.png);
 	background-color: rgb(55,55,55); 
 	width: 16px; 
 	height: 16px; 
-} */
+}
 QFrame#line{
     background-color: rgb(55,55,55);
 	border: 4px;
@@ -136,4 +139,29 @@ QProgressBar::chunk:horizontal {
 	background: color rgb(233, 215, 0);
 	border: 0px solid;
 	border-radius: 2px;
+}
+QScrollBar{              
+    background:solid rgb(30,30,30);
+	border-radius: 5px;
+    width:10px;
+}
+QScrollBar::handle {
+    background: solid rgb(133,133,133);
+    width:6px;
+	border-radius: 5px;
+    min-height: 0px;
+}
+QScrollBar::add-line {
+    height: 10 px;
+	border-radius: 5px;
+    width:10px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line {
+    height: 10 px;
+	border-radius: 5px;
+    width:10px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
 }
