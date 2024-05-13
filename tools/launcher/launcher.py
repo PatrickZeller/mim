@@ -9,6 +9,8 @@ from . import launcher_ui
 from mim import style
 from mim import core
 from mim import resources
+import mim.version
+
 
 class Launcher(QtWidgets.QDialog):
     """Launcher interface"""
@@ -35,7 +37,6 @@ class Launcher(QtWidgets.QDialog):
         )
         self.setFocus()
 
-
     def update_toolbox(self):
         pass
 
@@ -43,7 +44,7 @@ class Launcher(QtWidgets.QDialog):
         pass
 
     def search(self):
-        pass    
+        pass
 
 
 def main():

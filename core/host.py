@@ -23,6 +23,10 @@ class Host:
         self.version = version
         self.host = "{}_{}".format(self.host_name, self.version)
         self.tools = Settings().studio
+        self.set_exec()
+
+    def set_exec(self):
+        pass
 
     def load_settings(self):
         """collects settings for given host application"""
@@ -68,6 +72,8 @@ class Host:
         cmd = " ".join(_args)
         os.system(cmd)
 
+    def get_workfile_extensions(self):
+        return [".mim"]        
 
     def launch(self):
         """launches the host application"""

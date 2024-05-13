@@ -11,13 +11,23 @@ from mim import style
 from tools.launcher import launcher
 from tools.studio_settings import studio_settings
 
+if sys.platform == "win32":
+    from PySide2 import QtWinExtras
+
+    myappid = "patrickzvfx.mim.tray.{}".format(mim.version.__version__)
+    QtWinExtras.QtWin.setCurrentProcessExplicitAppUserModelID(myappid)
+
+
 class mim_tray(QtWidgets.QSystemTrayIcon):
     """
     CREATE A SYSTEM TRAY ICON CLASS AND ADD MENU
     """
+
     def __init__(self, parent=None):
         QtWidgets.QSystemTrayIcon.__init__(self, parent)
-        self.setToolTip("MIM VFX Pipeline tools \nVersion: {}".format(mim.version.__version__))
+        self.setToolTip(
+            "MIM VFX Pipeline tools \nVersion: {}".format(mim.version.__version__)
+        )
         self.setIcon(QtGui.QIcon(resources.get_mim_icon_filepath()))
 
         # menu start
@@ -76,7 +86,6 @@ class mim_tray(QtWidgets.QSystemTrayIcon):
         self.setContextMenu(menu)
         self.activated.connect(self.onTrayIconActivated)
 
-
     def onTrayIconActivated(self, reason):
         """
         This function will trigger function on click or double click
@@ -102,7 +111,7 @@ class mim_tray(QtWidgets.QSystemTrayIcon):
         """
         this function will open settings
         """
-        os.system('calc')
+        os.system("calc")
 
     def open_browser(self):
         """
@@ -148,9 +157,9 @@ def main():
     app.setQuitOnLastWindowClosed(False)
     tray_icon = mim_tray()
     tray_icon.show()
-    tray_icon.showMessage('MIM', 'Tray is now available')
+    tray_icon.showMessage("MIM", "Tray is now available")
     sys.exit(app.exec_())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

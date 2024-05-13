@@ -22,7 +22,7 @@ class Settings:
             studio_location = ""
         else:
             self.not_set = False
-            studio_location = self.data["STUDIO"][sys.platform] # Linux = Linux, Mac = Darwin, Windows = Windows
+            studio_location = self.data["STUDIO"][sys.platform] # Linux = linux, Mac = darwin, Windows = win32
         return studio_location
     
     def set_studio_location(self, studio_paths):

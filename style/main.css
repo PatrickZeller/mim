@@ -1,6 +1,9 @@
 QWidget#Form{
 	background-color: rgb(30,30,30);
 }
+QLine{
+	color: rgb(55,55,55);
+}
 QWidget{
 	selection-color:  rgb(233, 215, 0);
 }
